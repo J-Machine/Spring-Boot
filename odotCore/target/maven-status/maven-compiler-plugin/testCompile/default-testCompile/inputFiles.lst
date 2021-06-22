@@ -1,0 +1,10 @@
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/TestConfigurationEmptyDb.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/TestConfiguration.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/TestConfigurationNullDataSource.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/TestCategoryDaoConfiguration.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/model/ItemTest.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/model/Categories.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/model/Items.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/dao/CategoryDaoTest.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/dao/ItemDaoTest.java
+/home/howl/LAB/DBP/LAB/Java/Spring-Boot-Demo/odotCore/src/test/java/com/makotojava/learn/odot/model/CategoryTest.java
