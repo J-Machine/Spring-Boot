@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testing Rest Services</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#btn_get").click(function(){
+				$.ajax({
+			    	url: "http://localhost:8080/ItemRestService/FindAll", 
+			    	success: function(result){
+			        	console.log(result);
+			    	  	var obj = result,  	// get entry object (array) from JSON data
+			            	ul = $("<ul>");  
+			            // iterate over the array and build the list
+		            	for (var i = 0, l = obj.length; i < l; ++i) {
+		                	ul.append("<li> ID: " + obj[i].id + " Description: " + obj[i].description + "</li>");
+		            	}           
+		            	$("#div1").append(ul);    // add the list to the DOM
+			    }});    
+			});
+		});
+	</script>
+</head>
+<body>
+	<h2>Testing REST</h2>
+	<p>Seleccione alguno de los siguientes métodos:</p>	
+	<button id="btn_get">GET</button>
+	<button id="btn_post">POST</button>
+	<button id="btn_put">PUT</button>
+	
+	<div id="div1"></div>
+
+</body>
+</html>
