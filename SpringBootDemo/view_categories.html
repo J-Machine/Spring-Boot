@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testing Rest Services</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#btn_get").click(function(){
+				$.ajax({
+			    	url: "http://localhost:8080/ItemRestService/FindAll", 
+			    	success: function(result){
+			        	console.log(result);
+			    	  	var obj = result,  	// get entry object (array) from JSON data
+			            	ul = $("<ul>");  
+			            // iterate over the array and build the list
+		            	for (var i = 0, l = obj.length; i < l; ++i) {
+		                	ul.append("<li> ID: " + obj[i].id + " Description: " + obj[i].description + "</li>");
+		            	}           
+		            	$("#div1").append(ul);    // add the list to the DOM
+			    }});    
+			});
+			
+			$("#btn_put").click(function(){
+				$.ajax({
+					type: "PUT",
+					url: "http://localhost:8080/ItemRestService/Add", 
+					contentType: 'application/json',
+					dataType: 'json',
+					data: JSON.stringify({"description": " (New item)"}), 
+					success: function(result){
+						console.log(result);
+						$("#div1").html(result);
+					},
+					error : function(xhr, status) {
+						console.log(xhr);
+					}
+				});
+			});
+			
+			
+			$("#btn_post").click(function(){
+				$.ajax({
+					type: "POST",
+					url: "http://localhost:8080/ItemRestService/Update", 
+					contentType: 'application/json',
+					dataType: 'json',
+					data: JSON.stringify({
+						"id": 6,
+				        "whenCreated": "2021-06-28",
+				        "whenLastUpdated": "2021-06-28",
+				        "description": " MODIFICACION DE ITEM",
+				        "dueDate": "2021-06-28",
+				        "finished": true,
+				        "category": null
+					}),
+					success: function(result){
+						console.log(result);
+					},
+					error : function(xhr, status) {
+						console.log(xhr);
+					}
+				});
+			});
+			
+			$("#btn_delete").click(function(){
+				var idItem = prompt("Please enter Id item");
+				$.ajax({
+					type: "DELETE",
+					url: "http://localhost:8080/ItemRestService/Delete", 
+					contentType: 'application/json',
+					data: JSON.stringify({"id": idItem}),
+					success: function(result){
+						console.log(result);
+					},
+					error : function(xhr, status) {
+						console.log(xhr);
+					}
+				});
+			});
+		});
+	</script>
+</head>
+<body>
+	<h2>Testing REST</h2>
+	<p>Seleccione alguno de los siguientes métodos:</p>	
+	<button id="btn_get">GET</button>
+	<button id="btn_put">PUT</button>
+	<button id="btn_post">POST</button>
+	<button id="btn_delete">DELETE</button>	
+	<div id="div1"></div>
+
+</body>
+</html>
