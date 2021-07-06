@@ -1,0 +1,101 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title>View categories</title>
+	<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script>
+		$(document).ready(function(){
+			$("#btn_get").click(function(){
+				$.ajax({
+			    	url: "http://localhost:8080/CategoryRestService/FindAll", 
+			    	dataType: 'json',
+			    	success: function(result){
+			        	console.log(result);
+			    	  	var obj = result,  	
+			            	body = $("#tb_body");  
+			   			body.empty(); // Evita que en cada llamado se cargue las nuevas filas debajo de las ya colocadas         
+		            	for (var i = 0, l = obj.length; i < l; ++i) {
+		                	body.append('<tr> <td class="c_id">' + obj[i].id + '</td>' + 
+		                			'<td class="c_name">' + obj[i].name + 
+		                			'</td> <td class="c_description">' + obj[i].description + '</td> </tr>');
+		            	}           
+					},
+					error : function(xhr, status) {
+						console.log(xhr);
+					}
+				}); 			
+			});
+
+			
+			$("#btn_put").click(function(){
+				
+				dataObj = {
+					"name": $("#name").val(),
+					"description": $("#description").val()
+				};
+				
+				$.ajax({
+					type: "PUT",
+					url: "http://localhost:8080/CategoryRestService/Add", 
+					contentType: "application/json",
+					data: JSON.stringify(dataObj), 
+					success: function(result){
+						console.log("Exito :)");
+						$("#btn_get").trigger('click');
+						alert("Se actualizó la tabla de categorías");
+					},
+					error : function(xhr, status) {
+						console.log(xhr);
+					}
+				});
+			});
+		})
+	</script>
+</head>
+<body>
+	<div class="container">
+			<h3 class="text-center">Lista de categorias</h3>
+			<br>
+			<div id="formulario" class="container">
+				<h4>Agregar nueva categoria</h4>
+				<p>La tabla se actualiza una vez que añade una nueva categoría.</p>
+				<form id="form" method="">		
+					<fieldset class="form-group">
+						<label>Name</label> <input type="text" value="" class="form-control" name="name" id="name" required="required">
+					</fieldset>
+	
+					<fieldset class="form-group">
+						<label>Description</label> <input type="text" value="" class="form-control" name="description" id="description">
+					</fieldset>
+	
+					<button type="button" id="btn_put" class="btn btn-primary">Agregar categoria</button>
+				</form>
+			</div>	
+			<br><br>
+			<div class="container text-left">
+				<h4>Ver tabla de las categorías</h4>
+				<p>Use el botón actualizar para ver información de todas las categorías:</p>	
+				<button id="btn_get" class="btn btn-success"> Actualizar tabla</button>
+				<br>
+				<br>
+				<table class="table table-bordered">
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Name</th>
+							<th>Description</th>
+						</tr>
+					</thead>
+					<tbody id="tb_body">
+					</tbody>
+				</table>
+			</div>
+		</div>
+	
+</body>
+</html>
